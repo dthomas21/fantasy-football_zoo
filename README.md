@@ -4,8 +4,8 @@
 
 **Draft Lottery Selection**
 
-8th worst record: 33%
-7th worst record: 20%
+- 8th worst record: 33%
+- 7th worst record: 20%
 6th worst record: 15%
 5th worst record: 10%
 4th place: 8%
@@ -35,7 +35,7 @@ Under the instances of trades and waiver wire acquisitions, the same rules will 
 *NOTE: Should Madden terminate production at any time, owners will be allowed to ubmit new keeper parameters to be voted on by the entire league per usual.* 
  
 ## Punishment
-18 hours in Denny's
+Denny's - 18 hours
  
 ## Appendix
 
