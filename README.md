@@ -48,4 +48,4 @@ Denny's - 18 hours
 5) ALLOW IR SPOT (7v1)
 6) NO VOTING ON TRADES (6v2)
  
- **May the best Ryd3r Ryd3!**
+ # May the best Ryd3r Ryd3!
