@@ -1,5 +1,15 @@
 # Official Site for the Zoo Ryd3r Cup
 
+## Draft Order:
+- Pick 1: Tommy
+- Pick 2: Ted
+- Pick 3: Park
+- Pick 4: Skyler
+- Pick 5: Brad
+- Pick 6: Darren
+- Pick 7: Aaron
+- Pick 8: Danswer
+
 ## New Rules:
 
 **Draft Lottery Selection**
