@@ -6,7 +6,7 @@ None at the moment (hopefully will change soon)
 
 ## New Rules:
 
-#### IR Reserve
+### IR Reserve
 
 An extra roster spot will be added to allow for IR players (see below from ESPN Fantasy):
 - ESPN Fantasy Football uses the NFL's official injury/inactive list to update a players' injury status
