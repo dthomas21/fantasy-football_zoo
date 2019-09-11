@@ -6,12 +6,13 @@ None at the moment (hopefully will change soon)
 
 ## New Rules:
 
-### IR Reserve
+**IR Reserve**
 
 An extra roster spot will be added to allow for IR players (see below from ESPN Fantasy):
 - ESPN Fantasy Football uses the NFL's official injury/inactive list to update a players' injury status
 - If the player in question on your team was recently put on IR, the system will register that change shortly
 - After the IR tag appears next to that player's name, you'll be able to send him to an IR slot on your roster
+ 
  
  **Keeper Rule (written by TWF):**
  
@@ -26,6 +27,7 @@ To reiterate, any player selected in this year's draft is keeper-eligible if the
 Under the instances of trades and waiver wire acquisitions, the same rules will apply. Each owner will have the option to keep two players, despite the method of addition, so long as the players abide by the Madden Rule, and the players are officially listed on the owner's roster by the end of each fantasy season. Trades during the offseason are encouraged.
 
 *NOTE: Should Madden terminate production at any time, owners will be allowed to ubmit new keeper parameters to be voted on by the entire league per usual.* 
+
 
 **Draft Lottery Selection**
 
@@ -57,6 +59,8 @@ Denny's - 18 hours
 4) NO -1 PENALTY FOR PAT (4v4 - default to current rule)
 5) ALLOW IR SPOT (7v1)
 6) NO VOTING ON TRADES (6v2)
+
+Pick Results
 
 - Pick 1: Tommy
 - Pick 2: Ted
