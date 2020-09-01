@@ -67,6 +67,7 @@ Costume decided by group!
 3) Add additional IR slot (6v1 - Passed)
 4) Cap Field Goals at 4 points (4v5 - DNP)
 5) Costume (7-0)
+
 *Teddy did not vote*
 
 Pick Results
