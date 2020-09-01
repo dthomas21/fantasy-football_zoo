@@ -70,7 +70,7 @@ Costume decided by group!
 
 *Teddy did not vote*
 
-Pick Results
+## Draft Order
 
 TBA
  
