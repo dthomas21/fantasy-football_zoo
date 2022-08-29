@@ -4,23 +4,10 @@
 
 TBA
 
-## New Rules:
+## New Rules 2022:
 
-**.5 PPR**
+No new rule changes this year
 
-Half a point will be added to each player's reception
- 
-**Addition of Super Flex**
-
-A Super Flex position is added to the roster, allowing an extra slot for a QB or any Flex position
-
-**Passing Scoring Changes**
-
-Passing TDs are reduced from 6 to 4 and interceptions are changed from -3 to -2
-
-**Additional IR slot**
-
-Largely due to COVID, we will be adding an additional IR slot, now allowing for 2 IR slots
  
  ## Reminders:
  **Keeper Rule Reminder (written by TWF):**
@@ -61,6 +48,11 @@ Costume decided by group!
  
 ## Appendix
 
+ Rule Results 2021:
+1) .5 PPR (6v1 tie - Passed)
+2) Passing TDs are reduced from 6 to 4 and interceptions are changed from -3 to -2
+3) IR slot back down to 1
+
  Rule Results 2019:
 1) .5 PPR (6v1 tie - Passed)
 2) Add Super Flex/Alter Passing Scoring (4v3 - Passed)
@@ -69,8 +61,6 @@ Costume decided by group!
 5) Costume (7-0)
 
 *Teddy did not vote*
-
-## Draft Order
 
 TBA
  
