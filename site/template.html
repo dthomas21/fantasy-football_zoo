@@ -421,10 +421,10 @@ tr.isk td{background:rgba(228,167,60,.06)}
       <div class="panel-head">
         <p class="eyebrow">Live from ESPN &middot; Zoo Hau5 OYB</p>
         <h2>Keeper Room</h2>
-        <p>Every roster as it stands going into the draft, with each player judged against the Madden 26 list. <strong>One keeper per team.</strong> A player qualifies if he was 89 or below in M26 &mdash; or if he was your keeper last season, which carries its own exemption.</p>
+        <p>Every roster as it stands going into the draft, with each player judged against the Madden 26 list. <strong>One keeper per team.</strong> A player qualifies if he was 89 or below in M26, or if he was a keeper last season &mdash; and those rights travel with the player, so a keeper you traded for is still a keeper.</p>
       </div>
       <h3 class="sect-title" style="margin-top:0">Last Season&rsquo;s Keepers</h3>
-      <p class="sect-note">Who each owner kept going into 2025 &mdash; and therefore who each owner may keep again in 2026 with no Madden check at all. A green card means the exemption is doing real work: that player is over the ceiling on the M26 list and is only keepable because he was kept last year.</p>
+      <p class="sect-note">Who each owner kept going into 2025. Those players may be kept again in 2026 with no Madden check at all &mdash; and if one was traded, the right went with him to his new roster. A green card means the exemption is doing real work: that player is over the ceiling on the M26 list and is only keepable because he was kept last year.</p>
       <div class="k25grid" id="k25grid"></div>
 
       <h3 class="sect-title">Rosters</h3>
@@ -805,7 +805,7 @@ tr.isk td{background:rgba(228,167,60,.06)}
     var order = weightedOrder(), board = document.getElementById("board");
     board.innerHTML = "";
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var gap = reduce ? 0 : 900;
+    var gap = reduce ? 0 : 2000;   /* 2s between picks - live reveal, not a flicker */
     order.forEach(function(o, i){
       setTimeout(function(){
         var d = document.createElement("div");
@@ -860,15 +860,19 @@ tr.isk td{background:rgba(228,167,60,.06)}
       esc(t.k25) + (t.k25held ? "" : " &mdash; no longer rostered") + "</p></div></div>";
 
     document.getElementById("roomBody").innerHTML = t.roster.map(function(r){
-      /* r = [name, pos, ovr26, ovr27, eligible, isKeeper25, viaExemptionOnly] */
-      var nm = r[0], pos = r[1], o26 = r[2], o27 = r[3], ok = !!r[4], isk = !!r[5], ex = !!r[6];
+      /* r = [name, pos, ovr26, ovr27, eligible, isKeeper25, viaExemptionOnly, keptBy] */
+      var nm = r[0], pos = r[1], o26 = r[2], o27 = r[3], ok = !!r[4], isk = !!r[5],
+          ex = !!r[6], frm = r[7] || "";
       var why;
-      if(o26 === null)      why = "Not rated in Madden";
-      else if(ex)           why = "Exempt &mdash; kept last season";
+      if(isk && frm)        why = "Kept last season by " + esc(frm) + " &mdash; the rights came with him";
+      else if(isk)          why = ex ? "Your keeper last season &mdash; exempt from the ceiling"
+                                     : "Your keeper last season, and under the ceiling anyway";
+      else if(o26 === null) why = "Not rated in Madden";
       else if(ok && o26 <= 89) why = "M26 " + o26 + ", under the ceiling";
       else if(ok)           why = "Rookie on the M26 list";
       else                  why = "M26 " + o26 + ", over the ceiling";
-      var badge = isk ? "<span class='kbadge" + (ex ? " ex" : "") + "'>2025 keeper</span>" : "";
+      var badge = isk ? "<span class='kbadge" + (ex ? " ex" : "") + "'>" +
+                        (frm ? "Keeper from " + esc(frm) : "2025 keeper") + "</span>" : "";
       return "<tr" + (isk ? " class='isk'" : "") + ">" +
         "<td><span class='pos'>" + esc(pos) + "</span></td>" +
         "<td>" + esc(nm) + badge + "</td>" +
@@ -903,7 +907,9 @@ tr.isk td{background:rgba(228,167,60,.06)}
   function renderK25(){
     document.getElementById("k25grid").innerHTML = D.k25.map(function(k){
       var cls, tag;
-      if(!k.held){ cls = "gone"; tag = "No longer on the roster &mdash; exemption is void"; }
+      if(!k.held){ cls = "gone"; tag = k.now
+        ? "Traded to " + esc(k.now) + " &mdash; the keeper rights went with him"
+        : "No longer rostered"; }
       else if(k.ex){ cls = "ex"; tag = "Over the ceiling on M26. Keepable only because he was kept."; }
       else { cls = "plain"; tag = "Also legal on M26 &mdash; the exemption is not needed."; }
       return "<div class='k25 " + cls + "'><p class='ow'>" + esc(k.team) + " (" + esc(k.owner) + ")</p>" +

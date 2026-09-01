@@ -136,6 +136,16 @@ def main(a):
             rec = names.get(str(p["playerId"]))
             k_prev.setdefault(p["teamId"], []).append(rec["n"] if rec else f"#{p['playerId']}")
 
+    # A keeper-eligible player carries his rights with him when traded, so index every
+    # keeper by name -> the owner who declared him. Whoever holds him now inherits it.
+    prev_mem = {m["id"]: (m.get("firstName") or "").strip() for m in prev_lg.get("members", [])}
+    prev_owner = {t["id"]: ", ".join(prev_mem.get(o, "?") for o in (t.get("owners") or []))
+                  for t in prev_lg.get("teams", [])}
+    kmap = {}
+    for tid, plist in k_prev.items():
+        for nm in plist:
+            kmap[name_key(nm)] = {"owner": prev_owner.get(tid, "?"), "name": nm}
+
     mem = {m["id"]: (m.get("firstName") or "").strip() for m in cur_lg.get("members", [])}
     teams, k25 = [], []
     for t in cur_lg["teams"]:
@@ -147,14 +157,16 @@ def main(a):
         for e in (t.get("roster") or {}).get("entries") or []:
             pl = e.get("playerPoolEntry", {}).get("player", {})
             nm, pos = pl.get("fullName"), ESPN_POS.get(pl.get("defaultPositionId"), "?")
-            isk = (nm == keeper)
-            held = held or isk
+            k = kmap.get(name_key(nm))            # was he anyone's keeper last season?
+            isk = k is not None
+            frm = "" if (not isk or k["owner"] == owner) else k["owner"]
+            held = held or (nm == keeper)
             m = mad.get(name_key(nm)) if pos in ESPN_TO_MADDEN else None
             o_prev = m[5] if m else None; y_prev = m[6] if m else None
             o_cur = m[2] if m else None
             by_rule = eligible(o_prev, y_prev)
             roster.append([nm, pos, o_prev, o_cur, int(by_rule or isk), int(isk),
-                           int(isk and not by_rule)])
+                           int(isk and not by_rule), frm])
         roster.sort(key=lambda r: (-r[4], -(r[2] if r[2] is not None else -1)))
         teams.append({"id": t["id"], "name": t.get("name"), "owner": owner, "rank": L["rank"],
                       "rec": f"{L['w']}-{L['l']}", "pf": L["pf"], "weight": L["weight"],
@@ -164,7 +176,17 @@ def main(a):
         k25.append({"owner": owner, "team": t.get("name"), "player": keeper,
                     "pos": row[1] if row else (m[1] if m else "?"),
                     "ovr26": m[5] if m else None, "ovr27": m[2] if m else None,
-                    "held": held, "ex": bool(row[6]) if row else False})
+                    "held": held, "ex": bool(row[6]) if row else False, "now": ""})
+    # if a keeper was traded away, say who holds him now - the rights went with him
+    where = {}
+    for t in teams:
+        for r in t["roster"]:
+            where[name_key(r[0])] = t
+    for k in k25:
+        if not k["held"] and k["player"]:
+            holder = where.get(name_key(k["player"]))
+            k["now"] = f"{holder['name']} ({holder['owner']})" if holder else ""
+
     teams.sort(key=lambda t: -t["weight"])
     order = [t["id"] for t in teams]
     k25.sort(key=lambda k: order.index(next(t["id"] for t in teams if t["name"] == k["team"])))
