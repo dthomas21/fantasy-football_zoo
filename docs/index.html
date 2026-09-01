@@ -331,7 +331,7 @@ tr.isk td{background:rgba(228,167,60,.06)}
   <div class="gate-card">
     <div class="crest">Z</div>
     <h1>Zoo Ryd3r Cup</h1>
-    <p class="gate-sub">Members only. Say the word.</p>
+    <p class="gate-sub">Ryd3rs only. Ryd3r out, ___</p>
     <div class="gate-rule"></div>
     <form class="gate-form" id="gateForm">
       <input type="text" id="pw" placeholder="PASSWORD" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="text" name="zoo-gate" aria-label="League password">
@@ -564,7 +564,7 @@ tr.isk td{background:rgba(228,167,60,.06)}
 <script>
 (function(){
   "use strict";
-  var PASSWORD = "ryd3rfantasy";   /* injected at build time from creds.env */
+  var PASSWORDS = ["ryd3rfantasy", "ryd3on"];   /* injected at build time from creds.env */
   var KEY = "zrc_unlocked_v1";
   /* Strip case, spaces and punctuation so autocorrect, a stray space or a capital
      from a phone keyboard can't lock somebody out of their own league page. */
@@ -598,7 +598,8 @@ tr.isk td{background:rgba(228,167,60,.06)}
   document.getElementById("gateForm").addEventListener("submit", function(ev){
     ev.preventDefault();
     var v = norm(document.getElementById("pw").value);
-    if(v === norm(PASSWORD)){ unlock(); }
+    var ok = PASSWORDS.some(function(p){ return v === norm(p); });
+    if(ok){ unlock(); }
     else {
       document.getElementById("gateErr").textContent =
         v ? "Not it. Try again." : "Type the password first.";

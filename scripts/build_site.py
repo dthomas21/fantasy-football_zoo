@@ -216,9 +216,12 @@ def main(a):
     pw = creds().get("SITE_PASSWORD")
     if not pw:
         raise SystemExit("SITE_PASSWORD missing from ~/.config/zoo-espn/creds.env")
+    # comma-separated list; the gate strips case/space/punctuation before comparing
+    pws = [x.strip() for x in pw.split(",") if x.strip()]
     html = tpl.replace("__DATA__", json.dumps(payload, separators=(",", ":"))) \
-              .replace("__PASSWORD__", pw)
-    assert "__DATA__" not in html and "__PASSWORD__" not in html
+              .replace("__PASSWORDS__", json.dumps(pws))
+    assert "__DATA__" not in html and "__PASSWORDS__" not in html
+    print(f"  accepted passwords: {pws}")
     os.makedirs("docs", exist_ok=True)
     open("docs/index.html", "w").write(html)                 # served by GitHub Pages
     open("docs/.nojekyll", "w").write("")
