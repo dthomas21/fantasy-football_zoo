@@ -1,0 +1,13 @@
+# League data pulled from ESPN - contains rosters and owner names. THIS REPO IS PUBLIC.
+data/
+
+# Built site - contains the league password and the roster data. Never commit.
+site/build/
+
+# Local scratch
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+~$*.xlsx

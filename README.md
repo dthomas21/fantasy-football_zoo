@@ -1,5 +1,14 @@
 # Official Site for the Zoo Ryd3r Cup
 
+> **Working on this repo?** Start with [CLAUDE.md](CLAUDE.md) — it has the keeper rule as
+> actually practised, the lottery seeding rule, how to rebuild the league website, and the
+> data gotchas. The league page itself is a private link; the URL and password live in
+> `~/.config/zoo-espn/creds.env`, not in this public repo.
+>
+> Two things below are out of date and kept for the historical record: the keeper rule has
+> been **one player per team since 2021** (not two), and the Madden 20 references date from
+> the rule's original 2019 writeup — the current lists are Madden 26 and 27.
+
 ## Draft Pick and Keeper Eligibility Tracker via Trades:
 
  
