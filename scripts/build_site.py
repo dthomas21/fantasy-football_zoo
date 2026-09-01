@@ -219,9 +219,12 @@ def main(a):
     html = tpl.replace("__DATA__", json.dumps(payload, separators=(",", ":"))) \
               .replace("__PASSWORD__", pw)
     assert "__DATA__" not in html and "__PASSWORD__" not in html
+    os.makedirs("docs", exist_ok=True)
+    open("docs/index.html", "w").write(html)                 # served by GitHub Pages
+    open("docs/.nojekyll", "w").write("")
     os.makedirs("site/build", exist_ok=True)
-    open("site/build/index.html", "w").write(html)
-    print(f"  built site/build/index.html ({len(html):,} bytes)")
+    open("site/build/index.html", "w").write(html)           # local copy for publishing
+    print(f"  built docs/index.html + site/build/index.html ({len(html):,} bytes)")
     print(f"  {len(teams)} teams | {len(players)} players | history {[h['year'] for h in history]}")
     for t in teams:
         print(f"    {t['weight']:>3}%  {t['name'][:28]:<29} {t['owner']:<9} {t['basis']}")

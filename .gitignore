@@ -1,7 +1,8 @@
 # League data pulled from ESPN - contains rosters and owner names. THIS REPO IS PUBLIC.
 data/
 
-# Built site - contains the league password and the roster data. Never commit.
+# Local build copy. NOTE: docs/index.html IS committed - it is what GitHub Pages serves,
+# so the page (password included) is public by design.
 site/build/
 
 # Local scratch
