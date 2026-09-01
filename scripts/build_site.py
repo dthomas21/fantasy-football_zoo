@@ -222,8 +222,15 @@ def main(a):
               .replace("__PASSWORDS__", json.dumps(pws))
     assert "__DATA__" not in html and "__PASSWORDS__" not in html
     print(f"  accepted passwords: {pws}")
+    # GitHub Pages serves the raw file, so it needs the document wrapper that the
+    # Artifact host would otherwise add. Without it the page renders in quirks mode.
+    standalone = ('<!DOCTYPE html>\n<html lang="en">\n<head>\n'
+                  '<meta charset="utf-8">\n'
+                  '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+                  '<meta name="color-scheme" content="dark">\n'
+                  '</head>\n<body>\n' + html + '\n</body>\n</html>\n')
     os.makedirs("docs", exist_ok=True)
-    open("docs/index.html", "w").write(html)                 # served by GitHub Pages
+    open("docs/index.html", "w").write(standalone)           # served by GitHub Pages
     open("docs/.nojekyll", "w").write("")
     os.makedirs("site/build", exist_ok=True)
     open("site/build/index.html", "w").write(html)           # local copy for publishing

@@ -13,6 +13,10 @@
   --maxw:1140px;
 }
 *{box-sizing:border-box}
+/* The Artifact host injects this; a standalone page must supply it itself, or an id
+   selector like #gate{display:grid} outranks the UA sheet and hidden elements stay visible. */
+[hidden]{display:none!important}
+img{max-width:100%}
 body{
   margin:0; background:var(--ground); color:var(--bone);
   font-family:var(--body); font-size:15px; line-height:1.55;

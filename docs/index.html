@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+</head>
+<body>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <title>Zoo Ryd3r Cup</title>
 <style>
@@ -13,6 +21,10 @@
   --maxw:1140px;
 }
 *{box-sizing:border-box}
+/* The Artifact host injects this; a standalone page must supply it itself, or an id
+   selector like #gate{display:grid} outranks the UA sheet and hidden elements stay visible. */
+[hidden]{display:none!important}
+img{max-width:100%}
 body{
   margin:0; background:var(--ground); color:var(--bone);
   font-family:var(--body); font-size:15px; line-height:1.55;
@@ -955,3 +967,6 @@ tr.isk td{background:rgba(228,167,60,.06)}
   })();
 })();
 </script>
+
+</body>
+</html>
