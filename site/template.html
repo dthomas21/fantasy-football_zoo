@@ -334,7 +334,7 @@ tr.isk td{background:rgba(228,167,60,.06)}
     <p class="gate-sub">Members only. Say the word.</p>
     <div class="gate-rule"></div>
     <form class="gate-form" id="gateForm">
-      <input type="password" id="pw" placeholder="PASSWORD" autocomplete="off" spellcheck="false" aria-label="League password">
+      <input type="text" id="pw" placeholder="PASSWORD" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="text" name="zoo-gate" aria-label="League password">
       <button class="btn" type="submit">Enter the Zoo</button>
       <p class="gate-err" id="gateErr" role="alert"></p>
     </form>
@@ -566,6 +566,9 @@ tr.isk td{background:rgba(228,167,60,.06)}
   "use strict";
   var PASSWORD = "__PASSWORD__";   /* injected at build time from creds.env */
   var KEY = "zrc_unlocked_v1";
+  /* Strip case, spaces and punctuation so autocorrect, a stray space or a capital
+     from a phone keyboard can't lock somebody out of their own league page. */
+  function norm(s){ return String(s == null ? "" : s).replace(/[^a-z0-9]/gi, "").toLowerCase(); }
 
   var D = __DATA__;
   /* [name, pos, ovr27, yrs27, team, ovr26, yrs26, pos26] */
@@ -594,10 +597,11 @@ tr.isk td{background:rgba(228,167,60,.06)}
   }
   document.getElementById("gateForm").addEventListener("submit", function(ev){
     ev.preventDefault();
-    var v = document.getElementById("pw").value.trim().toLowerCase();
-    if(v === PASSWORD){ unlock(); }
+    var v = norm(document.getElementById("pw").value);
+    if(v === norm(PASSWORD)){ unlock(); }
     else {
-      document.getElementById("gateErr").textContent = "Not it. Try again.";
+      document.getElementById("gateErr").textContent =
+        v ? "Not it. Try again." : "Type the password first.";
       document.getElementById("pw").value = "";
       document.getElementById("pw").focus();
     }
